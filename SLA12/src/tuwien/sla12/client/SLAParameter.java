@@ -3,6 +3,7 @@ package tuwien.sla12.client;
 public class SLAParameter {
 	private int ID;
 	private String name;
+	
 	public int getID() {
 		return ID;
 	}
@@ -16,5 +17,10 @@ public class SLAParameter {
 		this.name = name;
 	}
 	
+	
+	public SLAParameter(int id, String name){
+		this.ID =id;
+		this.name = name;
+	}
 	
 }

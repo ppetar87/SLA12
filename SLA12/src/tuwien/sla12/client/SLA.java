@@ -1,8 +1,10 @@
 package tuwien.sla12.client;
 
+import java.util.ArrayList;
+
 public class SLA {
 	private int ID;
-	private SLAParameter sp;
+	private ArrayList<SLAParameter> paramlist;
 	private Boolean active;
 	public int getID() {
 		return ID;
@@ -10,12 +12,7 @@ public class SLA {
 	public void setID(int iD) {
 		ID = iD;
 	}
-	public SLAParameter getSp() {
-		return sp;
-	}
-	public void setSp(SLAParameter sp) {
-		this.sp = sp;
-	}
+	
 	public Boolean getActive() {
 		return active;
 	}
@@ -23,5 +20,16 @@ public class SLA {
 		this.active = active;
 	}
 	
+	public SLA(int id, ArrayList<SLAParameter> sp, Boolean a){
+		this.ID=id;
+		this.paramlist=sp;
+		this.active=a;
+	}
+	public ArrayList<SLAParameter> getParamlist() {
+		return paramlist;
+	}
+	public void setParamlist(ArrayList<SLAParameter> paramlist) {
+		this.paramlist = paramlist;
+	}
 	
 }
