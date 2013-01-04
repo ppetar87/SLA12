@@ -3,16 +3,16 @@ package tuwien.sla12;
 import java.util.ArrayList;
 
 public class SLA {
-	private int ID;
+	//private int ID;
 	private ArrayList<SLAParameter> paramlist;
 	private Boolean active;
-	public int getID() {
+	/*public int getID() {
 		return ID;
 	}
 	public void setID(int iD) {
 		ID = iD;
 	}
-	
+	*/
 	public Boolean getActive() {
 		return active;
 	}
@@ -20,8 +20,8 @@ public class SLA {
 		this.active = active;
 	}
 	
-	public SLA(int id, ArrayList<SLAParameter> sp, Boolean a){
-		this.ID=id;
+	public SLA(ArrayList<SLAParameter> sp, Boolean a){
+		//this.ID=id;
 		this.paramlist=sp;
 		this.active=a;
 	}
