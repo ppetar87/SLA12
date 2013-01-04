@@ -1,4 +1,4 @@
-package tuwien.sla12.client;
+package tuwien.sla12;
 
 public abstract class User {
 	

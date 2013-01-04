@@ -1,6 +1,4 @@
-package tuwien.sla12.server;
-
-import tuwien.sla12.client.*;
+package tuwien.sla12;
 
 public class Main {
 

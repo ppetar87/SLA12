@@ -1,4 +1,4 @@
-package tuwien.sla12.server;
+package tuwien.sla12;
 
 public class Simulation {
 	

@@ -1,4 +1,4 @@
-package tuwien.sla12.client;
+package tuwien.sla12;
 
 public class SLAParameter {
 	private int ID;
