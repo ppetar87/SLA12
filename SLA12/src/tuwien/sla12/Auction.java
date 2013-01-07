@@ -34,6 +34,20 @@ public class Auction {
 			pl.add(p);
 	}
 	
+	public void startAuction(){
+		switch (type) {
+		case REVERSE_ENGLISH_AUCTION:
+			startREAuction();
+			break;
+		case DUTCH_AUCTION:
+			startDutchAuction();
+			break;
+		case DOUBLE_AUCTION:
+			startDoubleAuction();
+			break;
+		}
+	}
+	
 /*	public void consumerBid(Consumer c){
 		switch (type) {
 		case REVERSE_ENGLISH_AUCTION:
@@ -63,6 +77,7 @@ public class Auction {
 	}*/
 	
 	public void startREAuction(){
+		matched.clear();
 		for (Consumer con : cl) {
 			currentC = con;
 			provideReverseEnglish();
@@ -70,10 +85,19 @@ public class Auction {
 				matched.put(currentC, currentP);
 			}
 		}
+		System.out.println(matched.size());
 	}
 	
 	public void startDutchAuction(){
-		
+		matched.clear();
+		for (Provider prov : pl) {
+			currentP = prov;
+			consumeDutch();
+			if (currentC != null && currentP != null) {
+				
+			}
+		}
+		System.out.println(matched.size());
 	}
 	
 	public void startDoubleAuction(){
@@ -108,7 +132,12 @@ public class Auction {
 	}
 	
 	public void consumeDutch(){
-		
+			for (Consumer con : cl) {
+				if (con.bidding){
+					currentC = con;
+					break;
+				}
+			}
 	}
 
 	public void provideDutch(){

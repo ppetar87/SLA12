@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Consumer extends User{
-	public SLA sla;
+	public SLA sla = new SLA();
 	public Boolean bidding;
 	
 	public Consumer(){

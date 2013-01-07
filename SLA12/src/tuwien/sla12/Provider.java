@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Provider extends User{
 
-	public SLA sla;
+	public SLA sla = new SLA();
 	public Boolean bidding;
 	
 	public Provider(){

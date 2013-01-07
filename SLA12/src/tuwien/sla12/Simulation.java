@@ -10,8 +10,7 @@ public class Simulation{
 	public int nrProvider;
 	
 	public Simulation(int slaParams, AuctionType at, int aID, int consumer, int provider, Date duration){
-		this.auction.setType(at);
-		this.auction.setID(aID);
+		auction = new Auction(aID,at);
 		this.nrSLAs = slaParams;
 		this.nrConsumer = consumer;
 		this.nrProvider = provider;
@@ -33,7 +32,7 @@ public class Simulation{
 		}
 		
 		while (new Date().before(auction.getDuration())) {
-			
+			auction.startAuction();
 		}
 		
 	}

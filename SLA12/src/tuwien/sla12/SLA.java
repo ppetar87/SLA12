@@ -20,11 +20,11 @@ public class SLA {
 		this.active = active;
 	}
 	
-	public SLA(ArrayList<SLAParameter> sp, Boolean a){
+	/*public SLA(ArrayList<SLAParameter> sp, Boolean a){
 		//this.ID=id;
 		this.paramlist=sp;
 		this.active=a;
-	}
+	}*/
 	public ArrayList<SLAParameter> getParamlist() {
 		return paramlist;
 	}
