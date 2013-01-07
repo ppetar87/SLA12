@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class Consumer extends User{
 	public SLA sla;
+	public Boolean bidding;
 	
 	public Consumer(){
 		ArrayList<SLAParameter> paramlist = new ArrayList<SLAParameter>();
@@ -20,6 +21,7 @@ public class Consumer extends User{
 		}
 		sla.setParamlist(paramlist);
 		sla.setActive(true);
-		
+		Random random = new Random();
+		bidding = random.nextBoolean();
 	}
 }

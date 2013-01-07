@@ -6,6 +6,7 @@ import java.util.Random;
 public class Provider extends User{
 
 	public SLA sla;
+	public Boolean bidding;
 	
 	public Provider(){
 		ArrayList<SLAParameter> paramlist = new ArrayList<SLAParameter>();
@@ -21,7 +22,8 @@ public class Provider extends User{
 		}
 		sla.setParamlist(paramlist);
 		sla.setActive(true);
-		
+		Random random = new Random();
+		bidding = random.nextBoolean();
 	}
 	
 }

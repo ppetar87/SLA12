@@ -1,7 +1,7 @@
 package tuwien.sla12;
 
-public class AuctionType {
-	private int ID;
+public enum AuctionType {
+/*	private int ID;
 	private String name;
 	
 	public int getID() {
@@ -16,6 +16,10 @@ public class AuctionType {
 	public void setName(String name) {
 		this.name = name;
 	}
+	*/
 	
+	REVERSE_ENGLISH_AUCTION,
+	DUTCH_AUCTION,
+	DOUBLE_AUCTION;
 	
 }
