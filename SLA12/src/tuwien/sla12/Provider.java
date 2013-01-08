@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Provider extends User{
 
-	public SLA sla = new SLA();
+	private SLA sla = new SLA();
 	public Boolean bidding;
 	public Consumer matchedConsumer;
 	
@@ -25,6 +25,26 @@ public class Provider extends User{
 		sla.setActive(true);
 		Random random = new Random();
 		bidding = random.nextBoolean();
+	}
+	
+	public boolean bid() {
+		Random random = new Random();
+		bidding = random.nextBoolean();
+		return bidding;
+	}
+	
+	public boolean hasConsumer() {
+		if(matchedConsumer != null)
+			return true;
+		else return false;
+	}
+	
+	public SLA getSla() {
+		return this.sla;
+	}
+	
+	public void setConsumer(Consumer consumer) {
+		this.matchedConsumer = consumer;
 	}
 	
 }

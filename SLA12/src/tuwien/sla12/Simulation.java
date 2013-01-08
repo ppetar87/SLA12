@@ -24,16 +24,17 @@ public class Simulation{
 		
 		for(int i=1; i<=nrProvider;i++){
 			Provider p = new Provider();
+			p.setID(i);
 			auction.provide(p);
 		}
 		for(int i=1; i<=nrConsumer; i++) {
 			Consumer c = new Consumer();
+			c.setID(i);
 			auction.consume(c);
 		}
 		
-		while (new Date().before(auction.getDuration())) {
-			auction.startAuction();
-		}
+		// Start Auction
+		auction.startAuction();
 		
 	}
 	

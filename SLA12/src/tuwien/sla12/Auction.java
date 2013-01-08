@@ -3,6 +3,7 @@ package tuwien.sla12;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class Auction {
@@ -14,7 +15,8 @@ public class Auction {
 	private Date duration;
 	private ArrayList<Consumer> cl = new ArrayList<Consumer>();
 	private ArrayList<Provider> pl = new ArrayList<Provider>();
-	private HashMap<Consumer, Provider> matched = new HashMap<Consumer, Provider>();
+	// Provider , Consumer
+	private HashMap<Integer, Integer> matched = new HashMap<Integer, Integer>();
 	private Provider currentP = null;
 	private Consumer currentC = null;
 	
@@ -78,14 +80,46 @@ public class Auction {
 	
 	public void startREAuction(){
 		matched.clear();
-		for (Consumer con : cl) {
-			currentC = con;
-			provideReverseEnglish();
-			if (currentC != null && currentP != null) {
-				matched.put(currentC, currentP);
+		try {
+		while (new Date().before(getDuration())) {
+			for (Consumer con : cl) {
+	
+				// Iternate through all providers
+				for (Provider provider : pl) {
+					// check if they want to bid and didn't bit before
+					if (!matched.containsKey(provider.getID()) && provider.bid()) {
+						// Check if SLA Matches
+						if(provider.getSla().getParamlist().size() == con.getSla().getParamlist().size()) {
+							
+							// Check if consumer has already assigned to a provider -> then change that provider
+							Integer keyTORemove = 0;
+							if(matched.containsValue(con.getID())) {
+								for (Map.Entry<Integer, Integer> entry : matched.entrySet()) {
+									if (entry.getValue() == con.getID()) {
+										keyTORemove = entry.getKey();
+										break;
+									}
+								}
+								matched.remove(keyTORemove);
+							}
+							
+							// Add currect Provider / Consumer relation to Map
+							matched.put(provider.getID(), con.getID());
+							System.out.println("Bid : Proivder: " + provider.getID() + " Consumer: " + con.getID());
+						}
+					}
+					//Thread.sleep(1000);
+				}
+				
+				//if (currentC != null && currentP != null) {
+				//	matched.put(currentC, currentP);
+				//}
+				//currentC = null;
+				//currentP = null;
 			}
-			currentC = null;
-			currentP = null;
+		}
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());
 		}
 		System.out.println(matched.size());
 	}
