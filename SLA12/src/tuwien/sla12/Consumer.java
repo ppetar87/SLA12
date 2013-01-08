@@ -6,6 +6,7 @@ import java.util.Random;
 public class Consumer extends User{
 	public SLA sla = new SLA();
 	public Boolean bidding;
+	public Provider matchedProvider;
 	
 	public Consumer(){
 		ArrayList<SLAParameter> paramlist = new ArrayList<SLAParameter>();

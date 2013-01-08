@@ -7,6 +7,7 @@ public class Provider extends User{
 
 	public SLA sla = new SLA();
 	public Boolean bidding;
+	public Consumer matchedConsumer;
 	
 	public Provider(){
 		ArrayList<SLAParameter> paramlist = new ArrayList<SLAParameter>();
