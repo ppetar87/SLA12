@@ -22,11 +22,11 @@ public class Simulation{
 	
 	public void start(){
 		
-		for(int i=0; i<=nrProvider;i++){
+		for(int i=1; i<=nrProvider;i++){
 			Provider p = new Provider();
 			auction.provide(p);
 		}
-		for(int i=0; i<=nrConsumer; i++) {
+		for(int i=1; i<=nrConsumer; i++) {
 			Consumer c = new Consumer();
 			auction.consume(c);
 		}

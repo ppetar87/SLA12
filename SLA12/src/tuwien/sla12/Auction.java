@@ -84,6 +84,8 @@ public class Auction {
 			if (currentC != null && currentP != null) {
 				matched.put(currentC, currentP);
 			}
+			currentC = null;
+			currentP = null;
 		}
 		System.out.println(matched.size());
 	}
@@ -115,20 +117,21 @@ public class Auction {
 	}*/
 
 	public void provideReverseEnglish(){
-		Boolean bid=false;
-		do {	
+		//Boolean bid=false;
+		//do {	
 			for (Provider prov : pl) {
 				if (prov.bidding){
 					currentP = prov;
-					Random random = new Random();
-					prov.bidding = random.nextBoolean();
+					break;
+					//Random random = new Random();
+					//prov.bidding = random.nextBoolean();
 				}
 			}
-			for (Provider prov : pl) {
+		/*	for (Provider prov : pl) {
 				if (prov.bidding) 
 					bid=true;
 			}
-		} while (bid);
+		} while (bid);*/
 	}
 	
 	public void consumeDutch(){
