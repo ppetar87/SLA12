@@ -3,9 +3,8 @@ package tuwien.sla12;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
+
 import java.util.Map;
-import java.util.Random;
 
 public class Auction {
 	
@@ -51,34 +50,6 @@ public class Auction {
 		}
 	}
 	
-/*	public void consumerBid(Consumer c){
-		switch (type) {
-		case REVERSE_ENGLISH_AUCTION:
-			consumeReverseEnglish(c);
-			break;
-		case DUTCH_AUCTION:
-			consumeDutch(c);
-			break;
-		case DOUBLE_AUCTION:
-			consumeDouble(c);
-			break;
-		}
-	}
-	
-	public void providerBid(Provider p){
-		switch (type) {
-		case REVERSE_ENGLISH_AUCTION:
-			provideReverseEnglish(p);
-			break;
-		case DUTCH_AUCTION:
-			provideDutch(p);
-			break;
-		case DOUBLE_AUCTION:
-			provideDouble(p);
-			break;
-		}
-	}*/
-	
 	public void startREAuction(){
 		matched.clear();
 		try {
@@ -90,6 +61,8 @@ public class Auction {
 					// check if they want to bid and didn't bid before
 					if (!matched.containsKey(provider.getID()) && provider.bid()) {
 						// Check if SLA Matches
+						
+						/*
 						Iterator<SLAParameter> iter1 = provider.getSla().getParamlist().iterator();
 						Iterator<SLAParameter> iter2 = provider.getSla().getParamlist().iterator();
 						ArrayList<Integer> aid = new ArrayList<Integer>();
@@ -102,40 +75,49 @@ public class Auction {
 							SLAParameter p = (SLAParameter) iter2.next();
 							aid2.add(p.getID());
 						}
-						
-						//if(provider.getSla().getParamlist().size() == con.getSla().getParamlist().size()) {
-						if (aid.containsAll(aid2) && aid2.containsAll(aid)) {	
-							// Check if consumer has already assigned to a provider -> then change that provider
-							Integer keyTORemove = 0;
-							if(matched.containsValue(con.getID())) {
-								for (Map.Entry<Integer, Integer> entry : matched.entrySet()) {
-									if (entry.getValue() == con.getID()) {
-										keyTORemove = entry.getKey();
-										break;
+						*/
+						if(provider.getSla().getParamlist().size() == con.getSla().getParamlist().size()) {
+							if(compareSLAParams(provider.getSla().getParamlist(), con.getSla().getParamlist())) {
+							//if (aid.containsAll(aid2) && aid2.containsAll(aid)) {	
+								// Check if consumer has already assigned to a provider -> then change that provider
+								Integer keyTORemove = 0;
+								if(matched.containsValue(con.getID())) {
+									for (Map.Entry<Integer, Integer> entry : matched.entrySet()) {
+										if (entry.getValue() == con.getID()) {
+											keyTORemove = entry.getKey();
+											break;
+										}
 									}
+									matched.remove(keyTORemove);
 								}
-								matched.remove(keyTORemove);
+								
+								// Add currect Provider / Consumer relation to Map
+								matched.put(provider.getID(), con.getID());
+								System.out.println("Bid : Proivder: " + provider.getID() + " Consumer: " + con.getID());
 							}
-							
-							// Add currect Provider / Consumer relation to Map
-							matched.put(provider.getID(), con.getID());
-							System.out.println("Bid : Proivder: " + provider.getID() + " Consumer: " + con.getID());
 						}
 					}
 					//Thread.sleep(1000);
 				}
-				
-				//if (currentC != null && currentP != null) {
-				//	matched.put(currentC, currentP);
-				//}
-				//currentC = null;
-				//currentP = null;
 			}
 		}
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());
 		}
 		System.out.println(matched.size());
+	}
+	
+	private boolean compareSLAParams(ArrayList<SLAParameter> params1, ArrayList<SLAParameter> params2) {
+		int matchCounter = 0;
+		for (SLAParameter slaParameter : params1) {
+			for (SLAParameter slaParameter2 : params2) {
+				if (slaParameter.getID() == slaParameter2.getID())
+					matchCounter++;
+			}
+		}
+		if(matchCounter == params1.size())
+			return true;
+		return false;
 	}
 	
 	public void startDutchAuction(){
