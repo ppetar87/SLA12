@@ -11,11 +11,21 @@ public class Provider extends User{
 	
 	public Provider(){
 		ArrayList<SLAParameter> paramlist = new ArrayList<SLAParameter>();
+		ArrayList<Integer> unique = new ArrayList<Integer>(9);
 		Random r = new Random();
 		int result = r.nextInt(9 - 3) + 3;
 		for (int i=paramlist.size(); i<result; i=paramlist.size()){
 			r = new Random();
-			int p = r.nextInt(9);
+			Integer p = 0;
+			
+			//generate unique IDS
+			while(true) {
+				p = r.nextInt(9);
+				if(!unique.contains(p)) {
+					unique.add(p);
+					break;
+				}
+			}
 			SLAParameter sp = new SLAParameter(p,"param"+p);
 			if (!paramlist.contains(sp)) {
 				paramlist.add(sp);

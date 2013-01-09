@@ -104,7 +104,7 @@ public class Auction {
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());
 		}
-		System.out.println(matched.size());
+		System.out.println("Matched Provider to Consumers: " + matched.size());
 	}
 	
 	private boolean compareSLAParams(ArrayList<SLAParameter> params1, ArrayList<SLAParameter> params2) {

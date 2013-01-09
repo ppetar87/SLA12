@@ -18,7 +18,7 @@ public class Main {
 	    cal.add(Calendar.MINUTE, 2); // adds 2 minutes
 	    Date d = cal.getTime(); // returns new date object, one hour in the future
 		
-		Simulation rESimulation = new Simulation(5,AuctionType.REVERSE_ENGLISH_AUCTION,1,100,100,d);
+		Simulation rESimulation = new Simulation(5,AuctionType.REVERSE_ENGLISH_AUCTION,1,500,500,d);
 		rESimulation.start();
 		
 		
