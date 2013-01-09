@@ -19,11 +19,11 @@ public class Main {
 	    Date d = cal.getTime(); // returns new date object, one hour in the future
 		
 		Simulation rESimulation = new Simulation(5,AuctionType.REVERSE_ENGLISH_AUCTION,1,100,100,d);
-		//rESimulation.start();
+		rESimulation.start();
 		
 		
-		Simulation eSilumation = new Simulation(6, AuctionType.DOUBLE_AUCTION, 2, 100, 100, d);
-		eSilumation.start();
+		//Simulation eSilumation = new Simulation(6, AuctionType.DOUBLE_AUCTION, 2, 100, 100, d);
+		//eSilumation.start();
 		
 	}
 

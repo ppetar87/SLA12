@@ -16,7 +16,7 @@ public class Provider extends User{
 		for (int i=paramlist.size(); i<result; i=paramlist.size()){
 			r = new Random();
 			int p = r.nextInt(9);
-			SLAParameter sp = new SLAParameter(1,"param"+p);
+			SLAParameter sp = new SLAParameter(p,"param"+p);
 			if (!paramlist.contains(sp)) {
 				paramlist.add(sp);
 			}

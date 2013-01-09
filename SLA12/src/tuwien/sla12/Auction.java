@@ -3,6 +3,7 @@ package tuwien.sla12;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
@@ -84,13 +85,26 @@ public class Auction {
 		while (new Date().before(getDuration())) {
 			for (Consumer con : cl) {
 	
-				// Iternate through all providers
+				// Iterate through all providers
 				for (Provider provider : pl) {
-					// check if they want to bid and didn't bit before
+					// check if they want to bid and didn't bid before
 					if (!matched.containsKey(provider.getID()) && provider.bid()) {
 						// Check if SLA Matches
-						if(provider.getSla().getParamlist().size() == con.getSla().getParamlist().size()) {
-							
+						Iterator<SLAParameter> iter1 = provider.getSla().getParamlist().iterator();
+						Iterator<SLAParameter> iter2 = provider.getSla().getParamlist().iterator();
+						ArrayList<Integer> aid = new ArrayList<Integer>();
+						ArrayList<Integer> aid2 = new ArrayList<Integer>();
+						while(iter1.hasNext()) {
+							SLAParameter p = (SLAParameter) iter1.next();
+							aid.add(p.getID());
+						}
+						while(iter2.hasNext()) {
+							SLAParameter p = (SLAParameter) iter2.next();
+							aid2.add(p.getID());
+						}
+						
+						//if(provider.getSla().getParamlist().size() == con.getSla().getParamlist().size()) {
+						if (aid.containsAll(aid2) && aid2.containsAll(aid)) {	
 							// Check if consumer has already assigned to a provider -> then change that provider
 							Integer keyTORemove = 0;
 							if(matched.containsValue(con.getID())) {
