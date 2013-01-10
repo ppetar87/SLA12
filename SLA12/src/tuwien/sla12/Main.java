@@ -15,10 +15,10 @@ public class Main {
 		
 		Calendar cal = Calendar.getInstance(); // creates calendar
 	    cal.setTime(new Date()); // sets calendar time/date
-	    cal.add(Calendar.SECOND, 20); // adds 2 minutes
+	    cal.add(Calendar.SECOND, 60); // adds 2 minutes
 	    Date d = cal.getTime(); // returns new date object, one hour in the future
 		
-		Simulation rESimulation = new Simulation(5,AuctionType.REVERSE_ENGLISH_AUCTION,1,500,500,d);
+		Simulation rESimulation = new Simulation(9,AuctionType.REVERSE_ENGLISH_AUCTION,1,10000,10000,d);
 		rESimulation.start();
 		
 		

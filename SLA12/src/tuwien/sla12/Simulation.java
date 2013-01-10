@@ -23,12 +23,12 @@ public class Simulation{
 	public void start(){
 		
 		for(int i=1; i<=nrProvider;i++){
-			Provider p = new Provider();
+			Provider p = new Provider(nrSLAs);
 			p.setID(i);
 			auction.provide(p);
 		}
 		for(int i=1; i<=nrConsumer; i++) {
-			Consumer c = new Consumer();
+			Consumer c = new Consumer(nrSLAs);
 			c.setID(i);
 			auction.consume(c);
 		}

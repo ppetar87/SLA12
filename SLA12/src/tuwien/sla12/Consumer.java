@@ -8,11 +8,17 @@ public class Consumer extends User{
 	public Boolean bidding;
 	public Provider matchedProvider;
 	
-	public Consumer(){
+	public Consumer(int slanum){
 		ArrayList<SLAParameter> paramlist = new ArrayList<SLAParameter>();
 		ArrayList<Integer> unique = new ArrayList<Integer>(9);
 		Random r = new Random();
-		int result = r.nextInt(9 - 3) + 3;
+		int result;
+		if (slanum == 3) {
+			result = 3;
+		}
+		else {
+			result = r.nextInt(slanum - 3) + 3;
+		}
 		for (int i=paramlist.size(); i<result; i=paramlist.size()){
 			r = new Random();
 			Integer p = 0;
