@@ -61,21 +61,7 @@ public class Auction {
 					// check if they want to bid and didn't bid before
 					if (!matched.containsKey(provider.getID()) && provider.bid()) {
 						// Check if SLA Matches
-						
-						/*
-						Iterator<SLAParameter> iter1 = provider.getSla().getParamlist().iterator();
-						Iterator<SLAParameter> iter2 = provider.getSla().getParamlist().iterator();
-						ArrayList<Integer> aid = new ArrayList<Integer>();
-						ArrayList<Integer> aid2 = new ArrayList<Integer>();
-						while(iter1.hasNext()) {
-							SLAParameter p = (SLAParameter) iter1.next();
-							aid.add(p.getID());
-						}
-						while(iter2.hasNext()) {
-							SLAParameter p = (SLAParameter) iter2.next();
-							aid2.add(p.getID());
-						}
-						*/
+						//check size, then compare
 						if(provider.getSla().getParamlist().size() == con.getSla().getParamlist().size()) {
 							if(compareSLAParams(provider.getSla().getParamlist(), con.getSla().getParamlist())) {
 							//if (aid.containsAll(aid2) && aid2.containsAll(aid)) {	
@@ -91,7 +77,7 @@ public class Auction {
 									matched.remove(keyTORemove);
 								}
 								
-								// Add currect Provider / Consumer relation to Map
+								// Add correct Provider / Consumer relation to Map
 								matched.put(provider.getID(), con.getID());
 								System.out.println("Bid : Proivder: " + provider.getID() + " Consumer: " + con.getID());
 							}
@@ -104,6 +90,7 @@ public class Auction {
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());
 		}
+		System.out.println("Result of Reverse English Auction:");
 		System.out.println("Matched Provider to Consumers: " + matched.size());
 		System.out.println("liquidity: "+ matched.size()/(Math.min(pl.size(), cl.size())/100) + "%");
 	}
@@ -123,17 +110,72 @@ public class Auction {
 	
 	public void startDutchAuction(){
 		matched.clear();
-		for (Provider prov : pl) {
-			currentP = prov;
-			consumeDutch();
-			if (currentC != null && currentP != null) {
-				
+		try {
+			while (new Date().before(getDuration())) {
+				for (Provider provider : pl) {
+					for (Consumer consumer : cl) {
+						if (!matched.containsKey(consumer.getID()) && consumer.bid()) {
+							//check size, then compare
+							if(provider.getSla().getParamlist().size() == consumer.getSla().getParamlist().size()) {
+								if(compareSLAParams(provider.getSla().getParamlist(), consumer.getSla().getParamlist())) {
+									// check if provider has already sold, if yes, break 
+									if(matched.containsValue(provider.getID())) {
+										break;
+									}
+									matched.put(provider.getID(), consumer.getID());
+									System.out.println("Bid : Proivder: " + provider.getID() + " Consumer: " + consumer.getID());
+								}
+							}
+							
+						}
+					}
+				}
 			}
+			
+			
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());
 		}
-		System.out.println(matched.size());
+		System.out.println("Result of Dutch Auction:");
+		System.out.println("Matched Provider to Consumers: " + matched.size());
+		System.out.println("liquidity: "+ matched.size()/(Math.min(pl.size(), cl.size())/100) + "%");
+		
 	}
 	
 	public void startDoubleAuction(){
+		
+		matched.clear();
+		try {
+			while (new Date().before(getDuration())) {
+				for (Provider provider : pl) {
+					if (!matched.containsKey(provider.getID()) && provider.bid()) {
+						for (Consumer consumer : cl) {
+							if (!matched.containsKey(consumer.getID()) && consumer.bid()) {
+								//check size, then compare
+								if(provider.getSla().getParamlist().size() == consumer.getSla().getParamlist().size()) {
+									if(compareSLAParams(provider.getSla().getParamlist(), consumer.getSla().getParamlist())) {
+										// check if provider has already sold, if yes, break 
+										if(matched.containsValue(provider.getID()) || matched.containsValue(consumer.getID())) {
+											break;
+										}
+										matched.put(provider.getID(), consumer.getID());
+										System.out.println("Bid : Proivder: " + provider.getID() + " Consumer: " + consumer.getID());
+									}
+								}
+								
+							}
+						}
+					}
+				}
+			}
+			
+			
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		System.out.println("Result of Double Auction:");
+		System.out.println("Matched Provider to Consumers: " + matched.size());
+		System.out.println("liquidity: "+ matched.size()/(Math.min(pl.size(), cl.size())/100) + "%");
 		
 	}
 	
