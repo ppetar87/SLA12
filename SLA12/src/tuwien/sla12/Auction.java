@@ -79,7 +79,7 @@ public class Auction {
 								
 								// Add correct Provider / Consumer relation to Map
 								matched.put(provider.getID(), con.getID());
-								System.out.println("Bid : Proivder: " + provider.getID() + " Consumer: " + con.getID());
+								System.out.println("matched : Proivder: " + provider.getID() + " Consumer: " + con.getID());
 							}
 						}
 					}
@@ -123,7 +123,7 @@ public class Auction {
 										break;
 									}
 									matched.put(provider.getID(), consumer.getID());
-									System.out.println("Bid : Proivder: " + provider.getID() + " Consumer: " + consumer.getID());
+									System.out.println("matched : Proivder: " + provider.getID() + " Consumer: " + consumer.getID());
 								}
 							}
 							
@@ -154,12 +154,12 @@ public class Auction {
 								//check size, then compare
 								if(provider.getSla().getParamlist().size() == consumer.getSla().getParamlist().size()) {
 									if(compareSLAParams(provider.getSla().getParamlist(), consumer.getSla().getParamlist())) {
-										// check if provider has already sold, if yes, break 
+										// check if provider has already sold, or if consumer has already bought. if yes, break 
 										if(matched.containsValue(provider.getID()) || matched.containsValue(consumer.getID())) {
 											break;
 										}
 										matched.put(provider.getID(), consumer.getID());
-										System.out.println("Bid : Proivder: " + provider.getID() + " Consumer: " + consumer.getID());
+										System.out.println("matched : Proivder: " + provider.getID() + " Consumer: " + consumer.getID());
 									}
 								}
 								
@@ -179,54 +179,7 @@ public class Auction {
 		
 	}
 	
-	/*public void consumeReverseEnglish(){
-		for (Consumer con : cl) {
-			if (con.bidding) {
-				currentC = con;
-				Random random = new Random();
-				con.bidding = random.nextBoolean();
-			}
-		}
-	}*/
 
-	public void provideReverseEnglish(){
-		//Boolean bid=false;
-		//do {	
-			for (Provider prov : pl) {
-				if (prov.bidding){
-					currentP = prov;
-					break;
-					//Random random = new Random();
-					//prov.bidding = random.nextBoolean();
-				}
-			}
-		/*	for (Provider prov : pl) {
-				if (prov.bidding) 
-					bid=true;
-			}
-		} while (bid);*/
-	}
-	
-	public void consumeDutch(){
-			for (Consumer con : cl) {
-				if (con.bidding){
-					currentC = con;
-					break;
-				}
-			}
-	}
-
-	public void provideDutch(){
-		
-	}
-	
-	public void consumeDouble(){
-		
-	}
-
-	public void provideDouble(){
-		
-	}
 	
 	public AuctionType getType() {
 		return type;
