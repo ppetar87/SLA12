@@ -114,12 +114,12 @@ public class Auction {
 			while (new Date().before(getDuration())) {
 				for (Provider provider : pl) {
 					for (Consumer consumer : cl) {
-						if (!matched.containsKey(consumer.getID()) && consumer.bid()) {
+						if (!matched.containsValue(consumer.getID()) && consumer.bid()) {
 							//check size, then compare
 							if(provider.getSla().getParamlist().size() == consumer.getSla().getParamlist().size()) {
 								if(compareSLAParams(provider.getSla().getParamlist(), consumer.getSla().getParamlist())) {
 									// check if provider has already sold, if yes, break 
-									if(matched.containsValue(provider.getID())) {
+									if(matched.containsKey(provider.getID())) {
 										break;
 									}
 									matched.put(provider.getID(), consumer.getID());
@@ -150,12 +150,12 @@ public class Auction {
 				for (Provider provider : pl) {
 					if (!matched.containsKey(provider.getID()) && provider.bid()) {
 						for (Consumer consumer : cl) {
-							if (!matched.containsKey(consumer.getID()) && consumer.bid()) {
+							if (!matched.containsValue(consumer.getID()) && consumer.bid()) {
 								//check size, then compare
 								if(provider.getSla().getParamlist().size() == consumer.getSla().getParamlist().size()) {
 									if(compareSLAParams(provider.getSla().getParamlist(), consumer.getSla().getParamlist())) {
 										// check if provider has already sold, or if consumer has already bought. if yes, break 
-										if(matched.containsValue(provider.getID()) || matched.containsValue(consumer.getID())) {
+										if(matched.containsKey(provider.getID()) || matched.containsValue(consumer.getID())) {
 											break;
 										}
 										matched.put(provider.getID(), consumer.getID());
